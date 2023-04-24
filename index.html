@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hoisting</title>
+  </head>
+  <body>
+    <script>
+      // Hoisting is a behavior in JavaScript where variable declarations (using var)
+      // and function declarations are moved to the top of their scope by the JavaScript
+      //  engine during the compilation phase, before the code is actually executed.
+      //   This means that even if a variable is declared at the bottom of a function, it can be accessed
+      //   from the top of that function.
+      num = 10;
+    //   num = 10 //We can do this
+      console.log(window.num);
+    //   without below line it steel work above line but initializing is mandatory.
+      var num;
+
+      // However, let and const are not hoisted in the same way. When you declare a variable using
+      // let or const, it is not initialized to undefined until its declaration is evaluated during runtime.
+      // This means that if you try to access a let or const variable before it has been declared, you will
+      //  get a ReferenceError.
+
+      // num1=30;
+      // console.log(num1); // Uncaught ReferenceError: Cannot access 'num1' before initialization
+      // let num1;//declaration not get evaluated
+
+      // num2=30;
+      // console.log(num2); // Uncaught SyntaxError: Missing initializer in const declaration
+      // const num2;
+
+      // Block Scope
+
+      myFunction();
+        let x = 3;
+        
+      function myFunction() {
+        let x = 1;
+        if (true) {
+          let x = 2; // new variable x is created within this block
+          console.log(x); // output: 2
+        }
+        console.log(x); // output: 1
+      }
+      console.log(x);
+      console.log(window.x); //undefined
+
+      for (let i = 0; i < 5; i++) {
+        setTimeout(function () {
+          console.log(i); // output: 0 1 2 3 4
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
